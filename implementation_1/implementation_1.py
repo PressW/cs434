@@ -71,6 +71,7 @@ def problems_1_to_3():
 
     X_train,Y_train = make_matrix(train_file)
     W = compute_weight(X_train,Y_train)
+    print("\nW vector:\n", W, "\n")
     train_sse = compute_sse(X_train, Y_train, W)
 
     print("Training SSE: ", train_sse)
@@ -86,6 +87,7 @@ def problem_4():
 
     X_train,Y_train = make_matrix(train_file, dummy=False)
     W = compute_weight(X_train,Y_train)
+    print("\nW vector:\n", W, "\n")
     train_sse = compute_sse(X_train, Y_train, W)
 
     print("Training SSE: ", train_sse)
@@ -97,9 +99,10 @@ def problem_4():
 
 
 def problem_5(num_iterations):
+    print("\n\n----- Random Feature Generation -----")
     for i in range(num_iterations):
         rand = random.randint(1, 12)
-        print("\n----- Iteration {0}: Creating {1} randomized features -----".format(i, rand))
+        print("\n***** Iteration {0}: Creating {1} randomized features *****".format(i, rand))
 
         X_train,Y_train = make_matrix(train_file)
         X_train = generate_random_features(X_train, rand)
@@ -116,6 +119,6 @@ def problem_5(num_iterations):
 
 
 if __name__ == "__main__":
-    #problems_1_to_3()
-    #problem_4()
+    problems_1_to_3()
+    problem_4()
     problem_5(5)
