@@ -40,6 +40,11 @@ def compute_weight(X, Y):
 
 
 
+def compute_lambda_weight(X, Y, lmbda):
+    return np.matmul(np.matmul(np.linalg.inv(np.add(np.matmul(np.transpose(X), X), (lmbda * np.matmul(np.transpose(X), X)))), np.transpose(X)), Y)
+
+
+
 def compute_sse(X,Y,W):
     actual_predicted_diff = []
     for index, matrix in enumerate(X):
@@ -79,7 +84,7 @@ def problems_1_to_3():
     X_test,Y_test = make_matrix(test_file)
     test_sse = compute_sse(X_test, Y_test, W)
 
-    print("Testing SSE: ", test_sse)
+    print("Testing SSE: ", test_sse, "\n")
 
 
 def problem_4():
@@ -95,7 +100,7 @@ def problem_4():
     X_test,Y_test = make_matrix(test_file, dummy=False)
     test_sse = compute_sse(X_test, Y_test, W)
 
-    print("Testing SSE: ", test_sse)
+    print("Testing SSE: ", test_sse, "\n")
 
 
 def problem_5(num_iterations):
@@ -110,11 +115,28 @@ def problem_5(num_iterations):
         train_sse = compute_sse(X_train, Y_train, W)
         print("Training SSE {0}: ".format(i), train_sse)
 
-        X_test,Y_test = make_matrix(train_file)
+        X_test,Y_test = make_matrix(test_file)
         X_test = generate_random_features(X_test, rand)
         test_sse = compute_sse(X_test, Y_test, W)
         print("Testing SSE {0}: ".format(i), test_sse)
     print("\n")
+
+
+def problem_6():
+    print("\n\n----- Lambda Weight Calculations -----")
+    X_train,Y_train = make_matrix(train_file)
+    X_test,Y_test = make_matrix(test_file)
+
+    values = [0.00001, 0.0001, 0.001, 0.01, 0.05, 0.1, 0.5, 1, 2.5, 5]
+    for value in values:
+        print("\n***** Lambda value {0} *****".format(value))
+        W = compute_lambda_weight(X_train, Y_train, value)
+        train_sse = compute_sse(X_train, Y_train, W)
+        print("Training SSE: ", train_sse)
+        test_sse = compute_sse(X_test, Y_test, W)
+        print("Testing SSE: ", test_sse)
+    print("\n")
+
 
 
 
@@ -122,3 +144,4 @@ if __name__ == "__main__":
     problems_1_to_3()
     problem_4()
     problem_5(5)
+    problem_6()
