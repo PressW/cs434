@@ -41,7 +41,7 @@ def compute_weight(X, Y):
 
 
 def compute_lambda_weight(X, Y, lmbda):
-    return np.matmul(np.matmul(np.linalg.inv(np.add(np.matmul(np.transpose(X), X), (lmbda * np.matmul(np.transpose(X), X)))), np.transpose(X)), Y)
+    return np.matmul(np.matmul(np.linalg.inv(np.add(np.matmul(np.transpose(X), X), (lmbda * np.identity(len(np.matmul(np.transpose(X), X)))))), np.transpose(X)), Y)
 
 
 
@@ -127,7 +127,7 @@ def problem_6():
     X_train,Y_train = make_matrix(train_file)
     X_test,Y_test = make_matrix(test_file)
 
-    values = [0.00001, 0.0001, 0.001, 0.01, 0.05, 0.1, 0.5, 1, 2.5, 5]
+    values = [0.00001, 0.001, 0.01, 0.05, 0.1, 0.5, 1, 2.5, 5, 25, 50]
     for value in values:
         print("\n***** Lambda value {0} *****".format(value))
         W = compute_lambda_weight(X_train, Y_train, value)
