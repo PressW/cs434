@@ -124,16 +124,19 @@ and results in a far worse prediction of the testing dataset. \newline
 \medskip
 
 \section{Problem 8}
-\medskip
+\noindent Based on this equation, we sum across two terms: the standard SSE
+and the regularization term. As values of lambda increase, the regularization
+term dominates the summation. As lambda decreases, the SSE term dominates the
+summation. The summation as a whole represents the loss of the model; if we
+are therefore minimizing loss, for large values of lambda we will prioritize
+small magnitudes of \textit{w}. On the other hand, for small values of lambda,
+we are prioritizing the closest fit possible. \\
 
-\section{Problem 9}
-\medskip
-
-\section{Problem 10}
+\noindent Looking at our chart then, it makes sense that as we increase the
+value of lambda the calculated weights are made forcibly smaller to accomodate
+our increasing prioritization of regularization. \newline
 \medskip
 
  
 
-
 \end{document}
-
