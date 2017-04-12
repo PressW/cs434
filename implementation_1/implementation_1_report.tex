@@ -88,7 +88,8 @@
 \noindent SSE Testing data:  1675.23096595 \newline
 \noindent The SSE, or loss, increases as when we lose the dummy variable.
 Because the dummy variable correlates to our \textit{b} or \textit{w\textsubscript{0}},
-this indicates...
+which is what translates our line of best fit, removing the variable creates a less
+accurate prediction. \newline
 \medskip
 
 \section{Problem 5}
@@ -98,19 +99,28 @@ this indicates...
 \includegraphics[width=0.9\textwidth]{sse_rand_features.PNG}
 \caption{\label{fig:sse}Training SSE decreases linearly; Testing SSE increases exponentially.}
 \end{figure}
-
+\smallskip
+\noindent Based on the plot above, as more random, uniformly-distributed features
+are added to the datasets, the SSE of the training predictions decrease linearly,
+but the SSE of the testing data increases exponentially. Intuitively, this is the
+result of the model being trained very specifically to match the training dataset,
+which creates a better prediction particular to the training dataset due to overfitting
+and results in a far worse prediction of the testing dataset. \newline
 \medskip
 
 \section{Problem 6}
-\medskip
-
-\section{Problem 7}
 \begin{figure}[!h]
 \centering
 \captionsetup{justification=centering,margin=2cm}
 \includegraphics[width=0.9\textwidth]{weights_lambda.PNG}
 \caption{\label{fig:lambdas}The weights converge to 0 as the lambda increases.}
 \end{figure}
+\smallskip
+\noindent 
+\medskip
+
+\section{Problem 7}
+
 \medskip
 
 \section{Problem 8}
