@@ -61,7 +61,7 @@
 
 
 
-\section{Problem 1/2}
+\section{Problem 1 \& 2}
 \noindent [[  3.95843212e+01] \newline
 \noindent [ -1.01137046e-01] \newline
 \noindent [  4.58935299e-02] \newline
@@ -84,20 +84,20 @@
 \medskip
 
 \section{Problem 4}
-\noindent SSE Training data: 9561.19128998 \newline
-\noindent SSE Testing data:  1675.23096595 \newline
+\noindent SSE Training data: 10598.0572458 \newline
+\noindent SSE Testing data:  1797.625625 \newline \\
 \noindent The SSE, or loss, increases as when we lose the dummy variable.
 Because the dummy variable correlates to our \textit{b} or \textit{w\textsubscript{0}},
 which is what translates our line of best fit, removing the variable creates a less
 accurate prediction. \newline
-\medskip
+\newpage
 
 \section{Problem 5}
-\begin{figure}[!h]
+\begin{figure}[!htb]
 \centering
 \captionsetup{justification=centering,margin=2cm}
-\includegraphics[width=0.9\textwidth]{sse_rand_features.PNG}
-\caption{\label{fig:sse}Training SSE decreases linearly; Testing SSE increases exponentially.}
+\includegraphics[width=0.7\textwidth]{sse_rand_features.PNG}
+\caption{\label{rand}Training SSE decreases linearly; Testing SSE increases exponentially.}
 \end{figure}
 \smallskip
 \noindent Based on the plot above, as more random, uniformly-distributed features
@@ -106,23 +106,39 @@ but the SSE of the testing data increases exponentially. Intuitively, this is th
 result of the model being trained very specifically to match the training dataset,
 which creates a better prediction particular to the training dataset due to overfitting
 and results in a far worse prediction of the testing dataset. \newline
-\medskip
+\bigskip
 
 \section{Problem 6}
 \begin{figure}[!h]
 \centering
 \captionsetup{justification=centering,margin=2cm}
-\includegraphics[width=0.9\textwidth]{weights_lambda.PNG}
-\caption{\label{fig:lambdas}The weights converge to 0 as the lambda increases.}
+\includegraphics[width=0.7\textwidth]{norm_lambda.PNG}
+\caption{\label{norm}The norm of vector w converges to 0 as the lambda increases.}
+\end{figure}
+\begin{figure}[!h]
+\centering
+\captionsetup{justification=centering,margin=2cm}
+\includegraphics[width=0.7\textwidth]{weights_lambda.PNG}
+\caption{\label{weights}The individual weights converge to 0 as the lambda increases.}
+\end{figure}
+\medskip
+\begin{figure}[!h]
+\centering
+\captionsetup{justification=centering,margin=2cm}
+\includegraphics[width=0.7\textwidth]{sse_lambda.PNG}
+\caption{\label{sse}SSE's over the increasing lambda.}
 \end{figure}
 \smallskip
 \noindent 
 \medskip
 
 \section{Problem 7}
-\noindent Looking at the plot, as lambda increases the weights of each feature
-begin to converge to 0. Given a large enough lambda, the weights are essentially
-0, meaning each weight holds nearly no predictive power. \newline
+\noindent Looking at figure \ref{norm} and figure \ref{weights}, we see that as lambda increases 
+the weights of each feature begin to converge to 0. Given a large enough lambda, 
+the weights are essentially 0, meaning each weight holds nearly no predictive power.
+Obviously if the individual weights converge to 0, then the norm of the vector
+\textit{w} also converges to 0 as lambda increases.
+\newline
 \medskip
 
 \section{Problem 8}
@@ -135,8 +151,15 @@ small magnitudes of \textit{w}. On the other hand, for small values of lambda,
 we are prioritizing the closest fit possible. \\
 
 \noindent Looking at our chart then, it makes sense that as we increase the
-value of lambda the calculated weights are made forcibly smaller to accomodate
-our increasing prioritization of regularization. \newline
+value of lambda the calculated weights are made forcibly smaller to accommodate
+our increasing prioritization of regularization. Further, I think the SSE can
+be explained by looking at the number of instances being summed in the training
+set relative to the testing set. Based on figure \ref{sse} it appears each SSE
+curve has a similar shape, and the ratio between the two stays relatively constant.
+What reinforces this theory is the fact that the ratio between the curves at each
+point is nearly the ratio between the number of training instances to the number
+of testing instances.
+\newline
 \medskip
 
  
