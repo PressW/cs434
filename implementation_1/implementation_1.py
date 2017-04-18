@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-import math, random
+import math, random, sys
 
 
 col_names = ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX',
@@ -103,22 +103,27 @@ def problem_4():
     print("Testing SSE: ", test_sse, "\n")
 
 
-def problem_5(num_iterations):
+def problem_5():
     print("\n\n----- Random Feature Generation -----")
-    for i in range(num_iterations):
-        rand = random.randint(1, 12)
-        print("\n***** Iteration {0}: Creating {1} randomized features *****".format(i, rand))
+    #for i in range(num_iterations):
+    rands = [1, 2, 4, 5, 8, 10, 12, 15, 20, 25, 30, 40, 50, 100, 150, 250, 500]
+    for rand in rands:
+        #rand = random.randint(1, 35)
+        #print("\n***** Iteration {0}: Creating {1} randomized features *****".format(i, rand))
+        print("\n***** Creating {0} randomized features *****".format(rand))
 
         X_train,Y_train = make_matrix(train_file)
         X_train = generate_random_features(X_train, rand)
         W = compute_weight(X_train, Y_train)
         train_sse = compute_sse(X_train, Y_train, W)
-        print("Training SSE {0}: ".format(i), train_sse)
+        #print("Training SSE {0}: ".format(i), train_sse)
+        print("Training SSE: ", train_sse)
 
         X_test,Y_test = make_matrix(test_file)
         X_test = generate_random_features(X_test, rand)
         test_sse = compute_sse(X_test, Y_test, W)
-        print("Testing SSE {0}: ".format(i), test_sse)
+        #print("Testing SSE {0}: ".format(i), test_sse)
+        print("Testing SSE: ", test_sse)
     print("\n")
 
 
@@ -127,10 +132,12 @@ def problem_6():
     X_train,Y_train = make_matrix(train_file)
     X_test,Y_test = make_matrix(test_file)
 
-    values = [0.00001, 0.001, 0.01, 0.05, 0.1, 0.5, 1, 2.5, 5, 25, 50]
+    values = [0.01, 0.05, 0.1, 0.5, 1, 2.5, 5, 25, 50, 100, 250, 500, 1000, 5000, 10000, 100000]
     for value in values:
         print("\n***** Lambda value {0} *****".format(value))
         W = compute_lambda_weight(X_train, Y_train, value)
+        print("\nW vector:\n", W, "\n")
+        print("\nW norm: ", np.linalg.norm(W, ord=2))
         train_sse = compute_sse(X_train, Y_train, W)
         print("Training SSE: ", train_sse)
         test_sse = compute_sse(X_test, Y_test, W)
@@ -141,7 +148,24 @@ def problem_6():
 
 
 if __name__ == "__main__":
-    problems_1_to_3()
-    problem_4()
-    problem_5(5)
-    problem_6()
+    try:
+        arg = int(sys.argv[1])
+        if arg >= 1 and arg <=3:
+            problems_1_to_3()
+        elif arg == 4:
+            problem_4()
+        elif arg == 5:
+            problem_5()
+        elif (arg >= 6) and (arg <= 8):
+            problem_6()
+        elif len(sys.argv) == 1:
+            problems_1_to_3()
+            problem_4()
+            problem_5()
+            problem_6()
+        else:
+            print("\nUSAGE: python implementation_1.py <question>")
+            print("\n<question>\tdefaults to printing all questions if not parameter passed\n\n")
+    except:
+        print("\nUSAGE: python implementation_1.py <question>")
+        print("\n<question>\tdefaults to printing all questions if not parameter passed\n\n")
