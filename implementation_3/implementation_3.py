@@ -6,14 +6,32 @@ from math import exp
 
 
 def main():
-	print('Getting Data')
+	print('\nProblem 1')
+	run_dataset(7)
+
+
+
+def run_dataset(k):
+	print("\nrun_dataset")
 	X_train, Y_train, X_test, Y_test = get_data()
 
-	print('starting part 1.1')
-	# X_test[1] is just a random instance to pass the algorithm.
-	correctness = nearest_neighbor(X_train, Y_train, X_test[1], Y_test[1], 7)
-	if correctness == 1: print("\nCorrectly classified")
-	if correctness == 0: print("\nIncorrectly classified")
+	# Run training data
+	total = 0
+	correct = 0
+	for i in range(len(X_test)):
+		correctness = nearest_neighbor(X_train, Y_train, X_test[i], Y_test[i], k)
+		total += 1
+		correct += correctness
+	print("\nTraining Accuracy: ", (correct/total), "%%\n")
+
+	# Run testing data
+	total = 0
+	correct = 0
+	for i in range(len(X_test)):
+		correctness = nearest_neighbor(X_test, Y_test, X_test[i], Y_test[i], k)
+		total += 1
+		correct += correctness
+	print("\nTesting Accuracy: ", (correct/total), "%%\n")
 
 
 
@@ -44,7 +62,7 @@ def nearest_neighbor(X, Y, x_instance, y_actual, k):
 		votes.append(distances[i][2])
 	prediction, confidence = classify(votes)
 	if prediction == y_actual: return 1
-	else: return -1
+	else: return 0
 
 
 
