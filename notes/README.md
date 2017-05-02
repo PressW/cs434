@@ -1,5 +1,5 @@
 |             | Decision Boundaries (Predict) | Learning | Parameters | Optimal | Variants | Efficient? |
-| ----------- | :-------------------: | :-------:  | :----------: | :-------: | :-------: | :------: | :------: |
+| ----------- | :-------------------: | :-------:  | :----------: | :-------: | :-------: | :------: | 
 | Perceptron  | Linear, Deterministic | Iterative, Online, Batch | Learning Rate | Yes, if linearly separable | Voted, Average | Relatively in -> Learning, Prediction |
 | Logistic Regression | Linear, Probabilistic | Iterative, Online, Batch | Learning Rate, Lambda Regularization | Yes | Negative Log Likelihood | Similar to Perceptron |
 | Naive Bayes | Linear for binary/count features | Maximum Likelihood Estimation | Smoothing | Yes (MLE) | Multinomial | Very -> Single scan of data |
